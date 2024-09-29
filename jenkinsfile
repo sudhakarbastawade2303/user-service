@@ -29,20 +29,20 @@ pipeline {
                 }
             }
         }
-        // stage("docker build & docker push"){
-        //     steps{
-        //         script{
-        //             withCredentials([string(credentialsId: 'dockerhub', variable: 'docker_password')]) {
-        //                      sh '''
-        //                         docker build -t sudhakarbastawade/testapp:${VERSION} .
-        //                         docker login -u sudhakarbastawade -p ${docker_password}
-        //                         docker push sudhakarbastawade/testapp:${VERSION}
-        //                         docker rmi sudhakarbastawade/testapp:${VERSION}
-        //                     '''
-        //             }
-        //         }
-        //     }
-        // }
+        stage("docker build & docker push"){
+            steps{
+                script{
+                    withCredentials([string(credentialsId: 'dockerhub', variable: 'docker_password')]) {
+                             sh '''
+                                docker build -t sudhakarbastawade/user-service:${VERSION} .
+                                docker login -u sudhakarbastawade -p ${docker_password}
+                                docker push sudhakarbastawade/user-service:${VERSION}
+                                docker rmi sudhakarbastawade/user-service:${VERSION}
+                            '''
+                    }
+                }
+            }
+        }
         
         
         
